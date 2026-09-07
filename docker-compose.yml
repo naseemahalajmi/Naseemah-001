@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:16-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_USER: naseemah
       POSTGRES_PASSWORD: naseemah
@@ -17,6 +18,7 @@ services:
 
   mail:
     image: mailhog/mailhog:v1.0.1
+    restart: unless-stopped
     ports:
       - "8025:8025"
       - "1025:1025"
@@ -24,8 +26,10 @@ services:
   api:
     build:
       context: ./apps/api
+    restart: unless-stopped
     environment:
       DATABASE_URL: postgres://naseemah:naseemah@db:5432/naseemah
+      RATES_SNAPSHOT_URL: https://raw.githubusercontent.com/naseemahalajmi/Naseemah-001/main/apps/api/data/kuwait-rates.json
       SMTP_HOST: mail
       SMTP_PORT: "1025"
       SESSION_SECRET: dev-session-secret-change-me
@@ -59,6 +63,9 @@ services:
   web:
     build:
       context: ./apps/web
+    restart: unless-stopped
+    environment:
+      API_PROXY_TARGET: http://api:3000
     depends_on:
       - api
     ports:

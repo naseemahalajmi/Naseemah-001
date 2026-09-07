@@ -40,6 +40,24 @@ export function me() {
   return api<UserPublic>("/me");
 }
 
+export type KuwaitRate = {
+  currencyCode: string;
+  currencyName: string;
+  filsPerUnit: string;
+};
+
+export type KuwaitRatesSnapshot = {
+  sourceUrl: string;
+  publishedLabel: string | null;
+  fetchedAt: string | null;
+  nextRefreshAt: string | null;
+  rates: KuwaitRate[];
+};
+
+export function kuwaitRates() {
+  return api<KuwaitRatesSnapshot>("/kuwait-rates");
+}
+
 export function requestPasswordReset(email: string) {
   return api<{ ok: boolean }>("/password-resets", {
     method: "POST",

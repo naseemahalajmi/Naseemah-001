@@ -27,3 +27,17 @@ export type CompletePasswordResetRequest = {
 export type ApiError = {
   error: string;
 };
+
+export type KuwaitRate = {
+  currencyCode: string;
+  currencyName: string;
+  filsPerUnit: string;
+};
+
+export type KuwaitRatesSnapshot = {
+  sourceUrl: string;
+  publishedLabel: string | null;
+  fetchedAt: string | null;
+  nextRefreshAt: string | null;
+  rates: KuwaitRate[];
+};

@@ -30,7 +30,7 @@ a:hover {
 }
 
 .shell {
-  width: min(440px, calc(100% - 32px));
+  width: min(560px, calc(100% - 32px));
   margin: 56px auto;
 }
 
@@ -135,4 +135,36 @@ button.ghost {
 .meta {
   color: #5c5348;
   margin: 0 0 8px;
+}
+
+.rates-title {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 18px;
+  margin: 20px 0 8px;
+}
+
+.rates {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 16px;
+  font-size: 14px;
+}
+
+.rates th,
+.rates td {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid #e6dccf;
+}
+
+.rates th:nth-child(2),
+.rates td:nth-child(2),
+.rates th:nth-child(3),
+.rates td:nth-child(3) {
+  text-align: right;
+}
+
+.rate-name {
+  color: #5c5348;
+  font-weight: 400;
 }

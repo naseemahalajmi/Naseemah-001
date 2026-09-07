@@ -34,5 +34,19 @@ export async function ensureSchema(): Promise<void> {
       used_at timestamptz,
       created_at timestamptz not null default now()
     );
+
+    create table if not exists kuwait_rates (
+      id uuid primary key default gen_random_uuid(),
+      batch_id uuid not null,
+      currency_code text not null,
+      currency_name text not null,
+      fils_per_unit numeric not null,
+      published_label text,
+      source_url text not null,
+      fetched_at timestamptz not null default now()
+    );
+
+    create index if not exists kuwait_rates_fetched_at_idx
+      on kuwait_rates (fetched_at desc);
   `);
 }

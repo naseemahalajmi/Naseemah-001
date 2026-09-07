@@ -31,3 +31,7 @@ _Avoid_: Change password (that is a signed-in action, not this)
 **Home**:
 The only page a signed-in User sees.
 _Avoid_: Dashboard, workspace, portal
+
+**Kuwait rates**:
+KWD exchange rates (fils per unit). The API tries the live JSON server, then the GitHub snapshot, then the local file, then the last Postgres rows. Home still shows that stored snapshot when this machine is offline. A GitHub Action refreshes the snapshot every hour while the laptop is off.
+_Avoid_: Scraping cbk.gov.kw HTML as the live fetch target

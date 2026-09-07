@@ -3,6 +3,7 @@ import type { FastifyInstance } from "fastify";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { pool } from "./db.js";
+import { latestKuwaitRates } from "./kuwaitRates.js";
 import { sendPasswordResetEmail } from "./mail.js";
 import { clearSession, createSession, currentUser } from "./session.js";
 
@@ -93,6 +94,14 @@ export async function registerRoutes(app: FastifyInstance): Promise<void> {
       return reply.code(401).send({ error: "Not signed in." });
     }
     return user;
+  });
+
+  app.get("/api/kuwait-rates", async (request, reply) => {
+    const user = await currentUser(request);
+    if (!user) {
+      return reply.code(401).send({ error: "Not signed in." });
+    }
+    return latestKuwaitRates();
   });
 
   app.post("/api/password-resets", async (request, reply) => {
